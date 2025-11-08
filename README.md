@@ -90,6 +90,34 @@ package system, module will add itself globally as `window.markdownitFootnote`.
 
 ### Customize
 
+#### Custom href prefix
+
+You can customize the `href` attribute in footnote links by providing a `footnoteHrefPrefix` in the `env` parameter when calling `render()`. This is useful when you want footnotes to link to a different page or use a custom URL structure:
+
+```js
+const md = require('markdown-it')().use(require('markdown-it-footnote'));
+
+// Custom href prefix for footnote links
+md.render('Here is a footnote[^1]\n\n[^1]: Footnote text', {
+  footnoteHrefPrefix: '/docs/page#'
+});
+
+// Output includes: <a href="/docs/page#fn1" ...>
+```
+
+You can also combine this with `docId` to customize both the IDs and href prefix:
+
+```js
+md.render('Here is a footnote[^1]\n\n[^1]: Footnote text', {
+  docId: 'my-doc',
+  footnoteHrefPrefix: '/docs/page#'
+});
+
+// Output includes: <a href="/docs/page#fn-my-doc-1" id="fnref-my-doc-1">
+```
+
+#### Renderer customization
+
 If you want to customize the output, you'll need to replace the template
 functions. To see which templates exist and their default implementations,
 look in [`index.js`](index.js). The API of these template functions is out of

@@ -14,6 +14,14 @@ function render_footnote_anchor_name (tokens, idx, options, env/*, slf */) {
   return prefix + n
 }
 
+function render_footnote_href_prefix (tokens, idx, options, env/*, slf */) {
+  let prefix = '#'
+
+  if (typeof env.footnoteHrefPrefix === 'string') prefix = env.footnoteHrefPrefix
+
+  return prefix
+}
+
 function render_footnote_caption (tokens, idx/*, options, env, slf */) {
   let n = Number(tokens[idx].meta.id + 1).toString()
 
@@ -25,11 +33,12 @@ function render_footnote_caption (tokens, idx/*, options, env, slf */) {
 function render_footnote_ref (tokens, idx, options, env, slf) {
   const id = slf.rules.footnote_anchor_name(tokens, idx, options, env, slf)
   const caption = slf.rules.footnote_caption(tokens, idx, options, env, slf)
+  const hrefPrefix = slf.rules.footnote_href_prefix(tokens, idx, options, env, slf)
   let refid = id
 
   if (tokens[idx].meta.subId > 0) refid += `:${tokens[idx].meta.subId}`
 
-  return `<sup class="footnote-ref"><a href="#fn${id}" id="fnref${refid}">${caption}</a></sup>`
+  return `<sup class="footnote-ref"><a href="${hrefPrefix}fn${id}" id="fnref${refid}">${caption}</a></sup>`
 }
 
 function render_footnote_block_open (tokens, idx, options) {
@@ -56,11 +65,12 @@ function render_footnote_close () {
 
 function render_footnote_anchor (tokens, idx, options, env, slf) {
   let id = slf.rules.footnote_anchor_name(tokens, idx, options, env, slf)
+  const hrefPrefix = slf.rules.footnote_href_prefix(tokens, idx, options, env, slf)
 
   if (tokens[idx].meta.subId > 0) id += `:${tokens[idx].meta.subId}`
 
   /* ↩ with escape code to prevent display as Apple Emoji on iOS */
-  return ` <a href="#fnref${id}" class="footnote-backref">\u21a9\uFE0E</a>`
+  return ` <a href="${hrefPrefix}fnref${id}" class="footnote-backref">\u21a9\uFE0E</a>`
 }
 
 export default function footnote_plugin (md) {
@@ -77,6 +87,7 @@ export default function footnote_plugin (md) {
   // helpers (only used in other rules, no tokens are attached to those)
   md.renderer.rules.footnote_caption      = render_footnote_caption
   md.renderer.rules.footnote_anchor_name  = render_footnote_anchor_name
+  md.renderer.rules.footnote_href_prefix  = render_footnote_href_prefix
 
   // Process footnote block definition
   function footnote_def (state, startLine, endLine, silent) {

@@ -42,3 +42,17 @@ describe('custom docId in env', function () {
   // Now check that using `env.documentId` works to prefix IDs
   generate(fileURLToPath(new URL('fixtures/footnote-prefixed.txt', import.meta.url)), md, { docId: 'test-doc-id' })
 })
+
+describe('custom href prefix in env', function () {
+  const md = markdownit().use(footnote)
+
+  // Check that using `env.footnoteHrefPrefix` works to customize href
+  generate(fileURLToPath(new URL('fixtures/footnote-custom-href.txt', import.meta.url)), md, { footnoteHrefPrefix: '/custom/path#' })
+})
+
+describe('combined docId and custom href prefix in env', function () {
+  const md = markdownit().use(footnote)
+
+  // Check that both env.docId and env.footnoteHrefPrefix work together
+  generate(fileURLToPath(new URL('fixtures/footnote-combined.txt', import.meta.url)), md, { docId: 'my-doc', footnoteHrefPrefix: '/docs#' })
+})

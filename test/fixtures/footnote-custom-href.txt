@@ -1,0 +1,57 @@
+Custom href prefix:
+.
+Here is a footnote reference,[^1] and another.[^longnote]
+
+[^1]: Here is the footnote.
+
+[^longnote]: Here's one with multiple blocks.
+.
+<p>Here is a footnote reference,<sup class="footnote-ref"><a href="/custom/path#fn1" id="fnref1">[1]</a></sup> and another.<sup class="footnote-ref"><a href="/custom/path#fn2" id="fnref2">[2]</a></sup></p>
+<hr class="footnotes-sep">
+<section class="footnotes">
+<ol class="footnotes-list">
+<li id="fn1" class="footnote-item"><p>Here is the footnote. <a href="/custom/path#fnref1" class="footnote-backref">↩</a></p>
+</li>
+<li id="fn2" class="footnote-item"><p>Here's one with multiple blocks. <a href="/custom/path#fnref2" class="footnote-backref">↩</a></p>
+</li>
+</ol>
+</section>
+.
+
+
+Inline footnote with custom href:
+.
+Here is an inline note.^[Inlines notes are easier to write.]
+.
+<p>Here is an inline note.<sup class="footnote-ref"><a href="/custom/path#fn1" id="fnref1">[1]</a></sup></p>
+<hr class="footnotes-sep">
+<section class="footnotes">
+<ol class="footnotes-list">
+<li id="fn1" class="footnote-item"><p>Inlines notes are easier to write. <a href="/custom/path#fnref1" class="footnote-backref">↩</a></p>
+</li>
+</ol>
+</section>
+.
+
+
+Multiple references with custom href:
+.
+[^1][^2][^3]
+
+[^1]: foo
+[^2]: bar
+[^3]: baz
+.
+<p><sup class="footnote-ref"><a href="/custom/path#fn1" id="fnref1">[1]</a></sup><sup class="footnote-ref"><a href="/custom/path#fn2" id="fnref2">[2]</a></sup><sup class="footnote-ref"><a href="/custom/path#fn3" id="fnref3">[3]</a></sup></p>
+<hr class="footnotes-sep">
+<section class="footnotes">
+<ol class="footnotes-list">
+<li id="fn1" class="footnote-item"><p>foo <a href="/custom/path#fnref1" class="footnote-backref">↩</a></p>
+</li>
+<li id="fn2" class="footnote-item"><p>bar <a href="/custom/path#fnref2" class="footnote-backref">↩</a></p>
+</li>
+<li id="fn3" class="footnote-item"><p>baz <a href="/custom/path#fnref3" class="footnote-backref">↩</a></p>
+</li>
+</ol>
+</section>
+.

@@ -1,0 +1,19 @@
+Both docId and custom href prefix:
+.
+Here is a footnote reference,[^1] and another.[^longnote]
+
+[^1]: Here is the footnote.
+
+[^longnote]: Here's one with multiple blocks.
+.
+<p>Here is a footnote reference,<sup class="footnote-ref"><a href="/docs#fn-my-doc-1" id="fnref-my-doc-1">[1]</a></sup> and another.<sup class="footnote-ref"><a href="/docs#fn-my-doc-2" id="fnref-my-doc-2">[2]</a></sup></p>
+<hr class="footnotes-sep">
+<section class="footnotes">
+<ol class="footnotes-list">
+<li id="fn-my-doc-1" class="footnote-item"><p>Here is the footnote. <a href="/docs#fnref-my-doc-1" class="footnote-backref">↩</a></p>
+</li>
+<li id="fn-my-doc-2" class="footnote-item"><p>Here's one with multiple blocks. <a href="/docs#fnref-my-doc-2" class="footnote-backref">↩</a></p>
+</li>
+</ol>
+</section>
+.
